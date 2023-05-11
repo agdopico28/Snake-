@@ -59,7 +59,7 @@ public class Util {
             new ImageIcon(Util.class.getResource("/images/snake_cuerpoDeLado.png")),
             new ImageIcon(Util.class.getResource("/images/snake_giroIzquierdaArriba.png")),
             new ImageIcon(Util.class.getResource("/images/snake_giroIzquierdaDerecha.png")),
-            new ImageIcon(Util.class.getResource("/images/snake_giroIzquierdaArriba.png")),
+            new ImageIcon(Util.class.getResource("/images/snake_giroIzquierdaAbajo.png")),
             new ImageIcon(Util.class.getResource("/images/snake_giroIzquierda.png"))};
         Image images = icons[nodeType.ordinal()].getImage();
         g.drawImage(images, col*squareWidth, row * squareHeight, squareWidth, squareHeight, null);

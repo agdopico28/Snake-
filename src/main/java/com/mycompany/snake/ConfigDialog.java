@@ -47,6 +47,7 @@ public class ConfigDialog extends javax.swing.JDialog {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tfName.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         tfName.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 tfNameFocusLost(evt);

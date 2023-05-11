@@ -62,6 +62,7 @@ public class Snake {
         for(int i = 0; i < list.size(); i++){
             nodePrint = list.get(i);
             if(nodePrint == list.get(0)){
+                //cabeza
                 NodeType nodeType;
                 int row = nodePrint.getRow();
                 int col = nodePrint.getCol();
@@ -82,6 +83,7 @@ public class Snake {
                         throw new AssertionError();
                 }
             }else if(nodePrint == list.get(list.size() -1)){
+                //cola
                 NodeType nodeType;
                 int row = nodePrint.getRow();
                 int col = nodePrint.getCol();
@@ -99,8 +101,51 @@ public class Snake {
                 }
                 Util.drawSnake(g, row, col, squareWidth, squareHeight, nodeType);
             }else{
-                SquareType squareType = SquareType.BODY;
-                Util.drawSquare(g, nodePrint.getRow(), nodePrint.getCol(), squareWidth, squareHeight, squareType);
+                //cuerpo
+                Node preNode = list.get(i - 1);
+                Node nextNode = list.get(i + 1);
+                NodeType nodeType;
+                if (preNode.getRow() == nextNode.getRow()) {
+                    //cuerpo horizontal
+                    if (preNode.getCol() < nextNode.getCol()) {
+                        nodeType = NodeType.H_BODY;
+                        Util.drawSnake(g, nodePrint.getRow(), nodePrint.getCol(), squareWidth, squareHeight, nodeType);
+                    } else {
+                        nodeType = NodeType.H_BODY;
+                        Util.drawSnake(g, nodePrint.getRow(), nodePrint.getCol(), squareWidth, squareHeight, nodeType);
+                    }
+                } else if (preNode.getCol() == nextNode.getCol()) {
+                    //cuerpo vertical
+                    if (preNode.getRow() < nextNode.getRow()) {
+                        nodeType = NodeType.V_BODY;
+                        Util.drawSnake(g, nodePrint.getRow(), nodePrint.getCol(), squareWidth, squareHeight, nodeType);
+                    } else {
+                        nodeType = NodeType.V_BODY;
+                        Util.drawSnake(g, nodePrint.getRow(), nodePrint.getCol(), squareWidth, squareHeight, nodeType);
+                    }
+                } else if ((preNode.getRow() == nodePrint.getRow() && nextNode.getCol() == nodePrint.getCol())
+                        || (preNode.getCol() == nodePrint.getCol() && nextNode.getRow() == nodePrint.getRow())) {
+                    //giros
+                    if ((preNode.getRow() < nodePrint.getRow() && nextNode.getCol() > nodePrint.getCol())
+                            || (preNode.getCol() > nodePrint.getCol() && nextNode.getRow() < nodePrint.getRow())) {
+                        nodeType = NodeType.NE_BODY;
+                        Util.drawSnake(g, nodePrint.getRow(), nodePrint.getCol(), squareWidth, squareHeight, nodeType);
+
+                    } else if ((preNode.getRow() < nodePrint.getRow() && nextNode.getCol() < nodePrint.getCol())
+                            || (preNode.getCol() < nodePrint.getCol() && nextNode.getRow() < nodePrint.getRow())) {
+                        nodeType = NodeType.NO_BODY;
+                        Util.drawSnake(g, nodePrint.getRow(), nodePrint.getCol(), squareWidth, squareHeight, nodeType);
+
+                    } else if ((preNode.getRow() > nodePrint.getRow() && nextNode.getCol() > nodePrint.getCol())
+                            || (preNode.getCol() > nodePrint.getCol() && nextNode.getRow() > nodePrint.getRow())) {
+                        nodeType = NodeType.SE_BODY;
+                        Util.drawSnake(g, nodePrint.getRow(), nodePrint.getCol(), squareWidth, squareHeight, nodeType);
+
+                    } else {
+                        nodeType = NodeType.SO_BODY;
+                        Util.drawSnake(g, nodePrint.getRow(), nodePrint.getCol(), squareWidth, squareHeight, nodeType);
+                    }
+                }
             }
         }
     }
